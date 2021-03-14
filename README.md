@@ -1,2 +1,2 @@
 # Quizera
-Its a project for generating quiz which will help tutorial classes to keep track of their students revision and self study.
+Its a Online exam system will help to fetch result in ease also will increase transparency in marking system
