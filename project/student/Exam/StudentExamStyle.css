@@ -1,0 +1,113 @@
+body
+{
+	margin:0;
+	font-family:"Roboto",sans-serif;
+    background-color: lightcyan;
+}
+
+.header{
+	background-color: rgb(50,50,50); 
+	float:top;
+	padding-bottom:1%;
+	padding-top:1%; 
+	overflow: hidden;
+}
+
+#stud{
+	background-color: rgb(255,255,255);
+    font-size: 1em;
+    margin:0 0 0 5%;
+    padding: 2px 2px 2px 2px;
+    border-radius: 4px;
+}
+
+#stud:hover{
+    background-color: rgb(247, 131, 131);
+    cursor: pointer;
+}
+
+#lout{
+	background-color: rgb(255,255,255);
+	font-size: 1.5em;
+	margin-left: 90%;
+	padding: 4px 4px 4px 4px;
+	border-radius: 4px;
+}
+#lout:hover{
+	background-color: rgb(247, 131, 131);
+    cursor: pointer;
+}
+#lout a{
+	text-decoration: none;
+}
+
+.sidebar{
+	background-color: rgb(40,40,40); 
+	overflow: hidden;
+	float:left;
+	padding-bottom: 50%;
+}
+img{
+	width: 200px;
+	height:200px;
+	padding-left:20px;
+	margin-bottom:-40px;
+}
+#nam{
+    margin-left: 30%;
+	font-size:1;
+	color: rgb(255,255,255);
+}
+
+.timer{
+    padding-left: 90%;
+    font-size: 1.5em;
+    background-color: white;
+    color: rgb(170, 0, 0);
+}
+
+.container
+{
+    height: 400px;
+    width : 400px;
+    background: white;
+    top : 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    border-radius : 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.1),
+    inset 0 0 0 rgba(0,0,0,0.1);
+}
+#curr_que{
+	margin-left:10px;
+}
+table{
+	border-collapse: separate;
+	border-spacing: 0 10px;
+	margin-top: 10%;
+    font-size: 1.5em;
+    table-layout: fixed;
+}
+td{
+    width: 400px;
+    word-wrap: break-word;
+}
+.prev
+{
+	margin-top: 20%;
+	background-color: blue;
+	color: white;
+	font-size: 1.1em;
+	padding: 2px 2px;
+	cursor: pointer;
+}
+.next
+{
+	margin-left: 70%;
+	background-color: blue;
+	color: white;
+	font-size: 1.1em;
+	padding: 2px 2px;
+	cursor: pointer;
+}

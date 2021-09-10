@@ -1,0 +1,215 @@
+create table slogin(sid int primary key,username varchar(100),password varchar(100));
+ 	
+create table sdetail(sid int references slogin(sid) on delete cascade on update cascade,name varchar(100),resultid int references result(rid) on delete cascade on update cascade);
+
+create table attempted(sid int references slogin(sid) on delete cascade on update cascade,category varchar(100),total varchar(50),correct varchar(50));
+
+
+
+
+----------------------teacher---------------------------------------------------
+create table tlogin(tid int primary key,username varchar(100),password varchar(100),name varchar(100));
+
+create qbank(id Serial,Qno int,question varchar(600),opt1 varchar(500),opt2 varchar(500),opt3 varchar(500),opt4 varchar(500),correct varchar(500),category varchar(100),date date);
+
+
+
+
+-----------------------------------admin-----------------------------------------
+create table alogin(aid int primary key,username varchar(100),password varchar(100));
+create table Timetable(Date date,subject varchar(100) unique,duration int);
+
+
+
+
+examsys=# \d
+              List of relations
+ Schema |     Name     |   Type   |  Owner
+--------+--------------+----------+----------
+ public | alogin       | table    | postgres
+ public | attempted    | table    | postgres
+ public | qbank        | table    | postgres
+ public | qbank_id_seq | sequence | postgres
+ public | result       | table    | postgres
+ public | sdetail      | table    | postgres
+ public | slogin       | table    | postgres
+ public | timetable    | table    | postgres
+ public | tlogin       | table    | postgres
+(9 rows)
+
+
+examsys=# \d alogin;
+                       Table "public.alogin"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ aid      | integer                |           | not null |
+ username | character varying(100) |           |          |
+ password | character varying(100) |           |          |
+Indexes:
+    "alogin_pkey" PRIMARY KEY, btree (aid)
+
+
+examsys=# \d attempted;
+                      Table "public.attempted"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ sid      | integer                |           |          |
+ category | character varying(100) |           |          |
+ total    | character varying(50)  |           |          |
+ correct  | character varying(50)  |           |          |
+ date     | date                   |           |          |
+Foreign-key constraints:
+    "attempted_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+
+
+examsys=# \d qbank;
+                                     Table "public.qbank"
+  Column  |          Type          | Collation | Nullable |              Default
+----------+------------------------+-----------+----------+-----------------------------------
+ id       | integer                |           | not null | nextval('qbank_id_seq'::regclass)
+ qno      | integer                |           |          |
+ question | character varying(600) |           |          |
+ opt1     | character varying(500) |           |          |
+ opt2     | character varying(500) |           |          |
+ opt3     | character varying(500) |           |          |
+ opt4     | character varying(500) |           |          |
+ correct  | character varying(500) |           |          |
+ category | character varying(100) |           |          |
+
+
+examsys=# \d result;
+               Table "public.result"
+ Column |  Type   | Collation | Nullable | Default
+--------+---------+-----------+----------+---------
+ rid    | integer |           | not null |
+ sid    | integer |           |          |
+ php    | integer |           |          |
+ os     | integer |           |          |
+ java   | integer |           |          |
+ cg     | integer |           |          |
+ date   | date    |           |          |
+Indexes:
+    "result_pkey" PRIMARY KEY, btree (rid)
+    "un" UNIQUE CONSTRAINT, btree (sid)
+Foreign-key constraints:
+    "result_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+Referenced by:
+    TABLE "sdetail" CONSTRAINT "sdetail_resultid_fkey" FOREIGN KEY (resultid) REFERENCES result(rid) ON UPDATE CASCADE ON DELETE CASCADE
+
+
+examsys=# \d sdetail;
+                       Table "public.sdetail"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ sid      | integer                |           |          |
+ name     | character varying(100) |           |          |
+ resultid | integer                |           |          |
+Indexes:
+    "uni" UNIQUE CONSTRAINT, btree (sid)
+    "unk" UNIQUE CONSTRAINT, btree (resultid)
+Foreign-key constraints:
+    "sdetail_resultid_fkey" FOREIGN KEY (resultid) REFERENCES result(rid) ON UPDATE CASCADE ON DELETE CASCADE
+    "sdetail_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+
+
+examsys=# \d slogin;
+                       Table "public.slogin"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ sid      | integer                |           | not null |
+ username | character varying(100) |           |          |
+ password | character varying(100) |           |          |
+Indexes:
+    "slogin_pkey" PRIMARY KEY, btree (sid)
+Referenced by:
+    TABLE "attempted" CONSTRAINT "attempted_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "result" CONSTRAINT "result_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "sdetail" CONSTRAINT "sdetail_sid_fkey" FOREIGN KEY (sid) REFERENCES slogin(sid) ON UPDATE CASCADE ON DELETE CASCADE
+
+
+examsys=# \d timetable;
+                      Table "public.timetable"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ date     | date                   |           |          |
+ subject  | character varying(100) |           |          |
+ duration | integer                |           |          |
+ subid    | integer                |           | not null |
+Indexes:
+    "timetable_pkey" PRIMARY KEY, btree (subid)
+    "timetable_subject_key" UNIQUE CONSTRAINT, btree (subject)
+
+
+examsys=# \d tlogin;
+                       Table "public.tlogin"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ tid      | integer                |           | not null |
+ username | character varying(100) |           |          |
+ password | character varying(100) |           |          |
+ name     | character varying(100) |           |          |
+Indexes:
+    "tlogin_pkey" PRIMARY KEY, btree (tid)
+
+
+examsys=# select * from alogin;
+ aid |    username     | password
+-----+-----------------+----------
+ 401 | admin@gmail.com | admin123
+(1 row)
+
+
+examsys=# select * from attempted;
+ sid | category | total | correct |    date
+-----+----------+-------+---------+------------
+ 500 | PHP      | 3     | 2       | 2021-06-06
+(1 row)
+
+
+examsys=# select * from qbank;
+ id | qno |      question      |   opt1   |   opt2    |   opt3   |   opt4    |  correct  | category
+----+-----+--------------------+----------+-----------+----------+-----------+-----------+----------
+  3 |   1 | Father of php      | Rasmus   | brian     | dennis   | james     | Rasmus    | PHP
+  4 |   2 | PHP session        | $_sesion | $_SESSION | $_SERVER | $_Session | $_SESSION | PHP
+ 11 |   3 | PHP file extenson? | .php     | .pgp      | ..p      | .ph       | .php      | PHP
+(3 rows)
+
+
+examsys=# select * from result;
+ rid | sid | php | os | java | cg |    date
+-----+-----+-----+----+------+----+------------
+ 903 | 501 |     |    |      |    |
+ 901 | 500 |   2 | 50 |   50 | 50 | 2021-06-02
+(2 rows)
+
+
+examsys=# select * from sdetail;
+ sid |     name      | resultid
+-----+---------------+----------
+ 500 | Abhishek Supe |      901
+ 501 | Ankit         |      903
+(2 rows)
+
+
+examsys=# select * from slogin;
+ sid |    username     | password
+-----+-----------------+----------
+ 500 | abhi@gmail.com  | abhi123
+ 501 | ankit@gmail.com | ankit123
+(2 rows)
+
+
+examsys=# select * from timetable;
+    date    | subject | duration | subid
+------------+---------+----------+-------
+ 2021-05-15 | PHP     |       60 |    60
+(1 row)
+
+
+examsys=# select * from tlogin;
+ tid |     username     | password  |      name
+-----+------------------+-----------+----------------
+ 801 | dennis@gmail.com | dennis123 | Dennis Ritchie
+ 802 | brian@gmail.com  | brian123  | Brian
+(2 rows)
+

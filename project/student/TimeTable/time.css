@@ -1,0 +1,78 @@
+body
+{
+	margin:0;
+	font-family:"Roboto",sans-serif;
+}
+.header{
+	background-color: rgb(50,50,50); 
+	float:top;
+	padding-bottom:1%;
+	padding-top:2%;
+	overflow: hidden;
+}
+#stud{
+	font-size:1.5em;
+	color:rgb(255,255,255);
+}
+#lout{
+	background-color: rgb(255,255,255);
+	font-size: 1.2em;
+	margin:0 0 0 85%;
+	padding: 2px 2px 2px 2px;
+	border-radius: 4px;
+}
+#lout:hover{
+	background-color: rgb(247, 131, 131);
+}
+#lout a{
+	text-decoration: none;
+}
+
+
+.sidebar{
+	background-color: rgb(40,40,40); 
+	overflow: hidden;
+	float:left;
+	padding-bottom: 50%;
+}
+img{
+	width: 200px;
+	height:200px;
+	padding-left:20px;
+	margin-bottom:-40px;
+}
+#nam{
+	padding-left:20%;
+	font-size:1.1em;
+	color: rgb(255,255,255);
+}
+.sid_b{
+	background-color:transparent;
+	font-size:22px;
+	border-radius:40px;
+	padding:2% 0 2% 20%; 
+}
+.sid_b a{
+	color:rgb(255,255,255);
+	text-decoration:none;
+}
+.sid_b:hover{
+	background-color:rgb(33, 186, 209);
+}
+.content table{
+	margin-top:10%;
+	border-collapse: collapse;	
+	width: 50%;
+
+}
+.content th{
+	background-color: rgb(156, 250, 130);
+	height: 30px;
+}
+.content tr:nth-child(even){
+	background-color: rgb(171, 171, 171);
+}
+.content td{
+	height:30px;
+
+}
