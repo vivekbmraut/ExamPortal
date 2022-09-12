@@ -1,2 +1,5 @@
-# Quizera
-Its a Online exam system will help to fetch result in ease also will increase transparency in marking system
+# Exam Portal
+- Front end: **HTML/CSS**
+- ClientSide Validation: **JavaScript**
+- Back end: **PHP**
+- Database: **PostgreSQL**
